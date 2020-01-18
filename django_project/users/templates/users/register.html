@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}  {# you can extend another app's template #}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+    <form method='POST'>
+        {% csrf_token %}
+        {% comment %} csrf_token is a must to access the form context, it adds seurity {% endcomment %}
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Join Today
+            </legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+        </div>  {# in button type of submit there is no need to include href tag. it's itself is gonna send the data in post format here  #}
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a href="{% url 'login' %}" class="ml-2">Sign In</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}

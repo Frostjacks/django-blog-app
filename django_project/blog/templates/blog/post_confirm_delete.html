@@ -1,0 +1,23 @@
+{# this doen't passes the form for us so no need to write them . it will simply provide a post request to delete the post after we click the submit button. here the context variable name is object just as post detail #}
+
+{% extends 'blog/base.html' %}  {# you can extend another app's template #}
+
+{% block content %}
+<div class="content-section">
+    <form method='POST'>
+        {% csrf_token %}
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Delete Post</legend>
+            <h2>Are you sure you want to delete the post "{{ object.title }}"</h2>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+             {# in button type of submit there is no need to include href tag. it's itself is gonna send the data in post format here  #}
+
+            <a href="{% url 'post-detail' object.id %}" class="btn btn-outline-secondary">Cancel</a>
+        </div> 
+    </form>
+    
+</div>
+{% endblock content %}

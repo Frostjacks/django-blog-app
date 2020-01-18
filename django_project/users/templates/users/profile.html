@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+
+       <form method='POST' enctype='multipart/form-data'> {# to pass image data to our form properly we have to include  enctype='multipart/form-data'. without this the images will not be saved #}
+        {% csrf_token %}
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Form Info
+            </legend>
+            {{u_form|crispy}} {# is going to show only user and profile realted update fields as a single form #}
+            {{p_form|crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit"> Update </button>
+        </div>
+    </form> 
+    </div>
+{% endblock content %} 

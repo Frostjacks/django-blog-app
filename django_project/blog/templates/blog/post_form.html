@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}  {# you can extend another app's template #}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+    <form method='POST'>
+        {% csrf_token %}
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+                Join Today
+            </legend>
+            {{ form|crispy }} {# this form variable is default from createview  #}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Post</button>
+        </div>  {# in button type of submit there is no need to include href tag. it's itself is gonna send the data in post format here  #}
+    </form>
+    
+</div>
+{% endblock content %}
